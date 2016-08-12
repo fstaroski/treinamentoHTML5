@@ -3,13 +3,34 @@
   <head>
     <meta charset="utf-8">
     <title>Estrutura javascript</title>
+  </head>
+  <body>
+    <input type="button" name="name" value="Diga Oi" onclick="digaOi()">
+
+    <p class="paraCLASS"></p>
+    <p id="paraID"></p>
+    <p></p>
     <script type="text/javascript">
       function digaOi() {
         alert('Oi');
       }
+
+
+      document.getElementsByClassName('paraCLASS')[0].innerHTML = 'TEstes primeira classe';
+      document.getElementById('paraID').innerHTML = 'TEstes primeiro ID';
+
+      document.getElementById('paraID').style.backgroundColor = "red";
+
+      document.getElementsByTagName('p')[0].style.backgroundColor = "yellow";
+      document.getElementsByTagName('p')[2].innerHTML = 'teste terceira tag';
+      document.getElementsByTagName('p')[2].style.backgroundColor = 'green';
+
+      var paragrafos = document.getElementsByTagName('p');
+
+      for (var i = 0; i < paragrafos.length; i++) {
+        paragrafos[i].style.backgroundColor = 'black';
+      }
+
     </script>
-  </head>
-  <body>
-    <input type="button" name="name" value="Diga Oi" onclick="digaOi()">
   </body>
 </html>
