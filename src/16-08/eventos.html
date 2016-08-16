@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Eventos</title>
+    <script type="text/javascript">
+      function onMouseOver(){
+        document.getElementById('imagem').src = 'acesa.gif'
+      }
+      function onMouseOut(){
+        document.getElementById('imagem').src = 'apagada.gif'
+      }
+    </script>
+  </head>
+  <body>
+    <center>  <img src="apagada.gif" id='imagem' onmouseover='onMouseOver()' onmouseout='onMouseOut()' alt="" /> </ center>
+  </body>
+</html>
