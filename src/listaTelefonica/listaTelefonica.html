@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app='listaTelefonica'>
+  <head>
+    <meta charset="utf-8">
+    <style media="screen">
+      .jumbotron {
+        width: 400px;
+        text-align: center;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .jumbotron th,td {
+        text-align: left;;
+      }
+
+    </style>
+    <link rel="stylesheet" href="./lib/bootstrap/bootstrap.css"  charset="utf-8">
+    <script src='lib/angular.js'>   </script>
+    <script type="text/javascript">
+      var app = angular.module('listaTelefonica',[]);
+      app.controller('listaTelefonicaCtrl',function($scope){
+        $scope.title = 'Lista Telefonica';
+        $scope.contatos = [{nome:'Tiago',telefone: 4799990000},{nome:'Fernando',telefone: 4799990001},{nome:'Rony',telefone: 4799990002}];
+
+      });
+    </script>
+    <title></title>
+  </head>
+  <body ng-controller='listaTelefonicaCtrl'>
+    <div class="jumbotron">
+      <h3>{{title}}</h3>
+      <table class='table'>
+        <th> Contato </th> <th> Telefone </th>
+        <tr ng-repeat='contato in contatos'>
+          <td>{{contato.nome}}</td> <td>{{contato.telefone}}</td>
+        </tr>
+      </table>
+      <input type="text" class='form-control' name="Nome" value="" ng-model='nome'>
+      <input type="number" class='form-control' name="telefone" value="" ng-model='telefone'>
+      <p>
+        {{nome}}
+      </p>
+      <p>
+        {{telefone}}
+      </p>
+    </div>
+  </body>
+</html>
