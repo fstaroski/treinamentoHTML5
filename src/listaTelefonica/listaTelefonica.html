@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <style media="screen">
       .jumbotron {
-        width: 400px;
+        width: 500px;
         text-align: center;
         margin-top: 20px;
         margin-left: auto;
@@ -13,37 +13,73 @@
       .jumbotron th,td {
         text-align: left;;
       }
-
+      .selecionado {
+        background-color: yellow;
+      }
+      .negrito {
+        font-weight: bold;
+      }
     </style>
     <link rel="stylesheet" href="./lib/bootstrap/bootstrap.css"  charset="utf-8">
     <script src='lib/angular.js'>   </script>
     <script type="text/javascript">
       var app = angular.module('listaTelefonica',[]);
       app.controller('listaTelefonicaCtrl',function($scope){
-        $scope.title = 'Lista Telefonica';
-        $scope.contatos = [{nome:'Tiago',telefone: 4799990000},{nome:'Fernando',telefone: 4799990001},{nome:'Rony',telefone: 4799990002}];
 
+        $scope.title = 'Lista Telefônica';
+
+        $scope.adicionarContato = function (contato){
+          $scope.contatos.push(angular.copy(contato));
+          delete $scope.contato;
+        }
+        $scope.removerContato = function (contatos) {
+          $scope.contatos = contatos.filter((item) => {return !item.selecionado})
+        }
+
+
+        $scope.contatos = [ {nome:'Tiago',telefone: 4799990000},
+                            {nome:'Fernando',telefone: 4799990001},
+                            {nome:'Rony',telefone: 4799990002}  ];
+
+        $scope.carros = [ {nome: 'KA', ano: 2010},
+                          {nome: 'Pajero', ano: 2001},
+                          {nome: 'Logan', ano: 2009}  ];
+
+        $scope.operadoras = [ {nome: 'Tim', codigo: 54, tipo: 'celular'},
+                              {nome: 'Vivo', codigo: 15, tipo: 'celular'},
+                              {nome: 'Oi', codigo: 14, tipo: 'fixo'},
+                              {nome: 'GVT', codigo: 25, tipo: 'fixo'} ];
+
+        $scope.isContatoSelecionado = function (contato) {
+          return contato.selecionado;
+        }
       });
     </script>
+
     <title></title>
   </head>
   <body ng-controller='listaTelefonicaCtrl'>
     <div class="jumbotron">
       <h3>{{title}}</h3>
       <table class='table'>
-        <th> Contato </th> <th> Telefone </th>
-        <tr ng-repeat='contato in contatos'>
-          <td>{{contato.nome}}</td> <td>{{contato.telefone}}</td>
+        <th> Contato </th>
+        <th> Operadora </th>
+        <th> Telefone </th>
+        <th><input type="checkbox" name="name"  value=""> </th>
+        <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat='contato in contatos'>
+          <td>{{contato.nome}}</td>
+          <td>{{contato.operadora.codigo}}</td>
+          <td>{{contato.telefone}}</td>
+          <th><input type="checkbox" name="name" value=""  ng-model='contato.selecionado'></th>
         </tr>
       </table>
-      <input type="text" class='form-control' name="Nome" value="" ng-model='nome'>
-      <input type="number" class='form-control' name="telefone" value="" ng-model='telefone'>
-      <p>
-        {{nome}}
-      </p>
-      <p>
-        {{telefone}}
-      </p>
+      <input type="text" class='form-control' name="Nome" value="" ng-model='contato.nome'>
+      <select ng-model='contato.operadora' class="form-control" ng-options='operadora.nome group by operadora.tipo for operadora in operadoras' name="">
+        //<option>Selecione um tipo de operadora</option>
+      </select>
+      <input type="number" class='form-control' name="telefone" value="" ng-model='contato.telefone'>
+      <button type="button" name="button" class='btn btn-primary btn-block' ng-click='adicionarContato(contato)' ng-disabled='!(contato.nome && contato.telefone)'>Adicionar contato</button>
+      <button type="button" name="button" class='btn btn-danger btn-block' ng-click='removerContato(contatos)' ng-disabled='!(contatos.some(isContatoSelecionado))'>Apagar contato</button>
     </div>
   </body>
 </html>
