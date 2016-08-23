@@ -1,0 +1,6 @@
+$scope.cores = [{nome:'yellow'},{nome:'red'},{nome:'blue'},{nome:'pink'},{nome: 'green'},{nome:'purple'},{nome:'black'}];
+
+
+<select ng-model='contato.cor' ng-style='{"background-color": cor.nome}' class="form-control" ng-options='cores.nome  for cor in cores' name="">
+  <option value=''>Selecione uma cor</option>
+</select>
